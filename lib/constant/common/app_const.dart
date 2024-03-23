@@ -8,5 +8,5 @@ class AppConst {
   static const String appVersion = '1.0.0';
 
   /// App theme
-  static const Size designSize = Size(360, 716);
+  static const Size designSize = Size(1366, 768);
 }
