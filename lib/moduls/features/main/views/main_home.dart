@@ -1,38 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:kos_admin/component/buttons.dart';
 import 'package:kos_admin/component/side_menu.dart';
+import 'package:kos_admin/config/themes/colours.dart';
+import 'package:kos_admin/moduls/features/logout/controllers/logout_controller.dart';
 
 class MainHome extends StatelessWidget {
-  const MainHome({super.key});
+  MainHome({super.key});
+
+  final LogoutController logoutController = Get.put(LogoutController());
 
   @override
   Widget build(BuildContext context) {
     const List<String> headTitle = [
-      'Dashboard',
-      'User',
-      'Product',
-      'Transaction',
+      'Room',
+      'Occupant',
+      'Subscription',
       'Setting',
     ];
     const List<IconData> headIcon = [
       Icons.dashboard,
       Icons.person,
-      Icons.shopping_bag,
-      Icons.credit_card,
+      Icons.money,
       Icons.settings,
     ];
     const List<Color> headColor = [
       Colors.blue,
       Colors.green,
       Colors.orange,
-      Colors.red,
       Colors.purple,
     ];
-    const List<Widget> pages = [
-      Text('Dashboard'),
-      Text('User'),
-      Text('Product'),
-      Text('Transaction'),
-      Text('Setting'),
+    List<Widget> pages = [
+      const Text('Room'),
+      const Text('Occupant'),
+      const Text('Subscription'),
+      Container(
+        padding: const EdgeInsets.all(10.0),
+        width: double.infinity,
+        height: double.infinity,
+        child: SizedBox(
+          width: 0.1.sw,
+          height: 0.1.sh,
+          child: ButtonComponent(
+              onTap: () {
+                logoutController.logout();
+              },
+              text: 'Logout',
+              color: Colours.danger),
+        ),
+      ),
     ];
     return SideMenuBar(
         headTitle: headTitle,

@@ -20,7 +20,7 @@ class AppPages {
           transitionDuration: const Duration(seconds: 1)),
       GetPage(
           name: AppRoutes.main,
-          page: () => const MainHome(),
+          page: () => MainHome(),
           transition: Transition.fadeIn,
           transitionDuration: const Duration(seconds: 1)),
     ];
