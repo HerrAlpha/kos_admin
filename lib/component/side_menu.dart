@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kos_admin/config/themes/app_theme.dart';
 
 class SideMenuBar extends StatelessWidget {
   final List<String> headTitle;
@@ -91,11 +92,13 @@ class SideMenuBar extends StatelessWidget {
                                 ),
                                 Text(
                                   headTitle[index],
-                                  style: TextStyle(
+                                  style: AppTheme
+                                      .mainTheme.textTheme.bodyMedium!
+                                      .copyWith(
                                     color: selectedMenuItem.value == index
                                         ? headColor[index]
-                                        : Colors.grey,
-                                    fontWeight: FontWeight.w500,
+                                        : Colors.black,
+                                    fontSize: 16,
                                   ),
                                 ),
                               ],

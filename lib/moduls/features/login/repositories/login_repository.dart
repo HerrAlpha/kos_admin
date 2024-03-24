@@ -9,7 +9,7 @@ class LoginRepository {
     Map<String, dynamic> body,
   ) async {
     try {
-      const String url = ApiConst.baseUrl + ApiConst.login;
+      const String url = ApiConst.login;
       final Map<String, dynamic> headers = {
         'Content-Type': 'application/json',
       };

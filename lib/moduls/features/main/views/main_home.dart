@@ -5,6 +5,7 @@ import 'package:kos_admin/component/buttons.dart';
 import 'package:kos_admin/component/side_menu.dart';
 import 'package:kos_admin/config/themes/colours.dart';
 import 'package:kos_admin/moduls/features/logout/controllers/logout_controller.dart';
+import 'package:kos_admin/moduls/features/room/views/ui/room_view.dart';
 
 class MainHome extends StatelessWidget {
   MainHome({super.key});
@@ -32,7 +33,7 @@ class MainHome extends StatelessWidget {
       Colors.purple,
     ];
     List<Widget> pages = [
-      const Text('Room'),
+      RoomView(),
       const Text('Occupant'),
       const Text('Subscription'),
       Container(

@@ -39,6 +39,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   shared_preferences: ^2.2.2
   dio: ^5.4.1
+  data_table_2: ^2.5.11
   # dio: ^5.4.1
   # shared_preferences: ^2.2.2
   # shared_preferences: ^2.2.2

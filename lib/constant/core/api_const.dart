@@ -8,6 +8,7 @@ class ApiConst {
   static const String logout = 'auth/logout';
 
   //* Room
+  static const String listRoom = 'room/list';
 
   //* Occupy
 
