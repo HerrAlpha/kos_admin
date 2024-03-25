@@ -11,6 +11,8 @@ class ApiConst {
   static const String listRoom = 'room/list';
 
   //* Occupy
+  static const String listOccupy = 'occupy/list';
+  static const String occupyAcception = 'occupy/acception';
 
   //* Subscription
 }

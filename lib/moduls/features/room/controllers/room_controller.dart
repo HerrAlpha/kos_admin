@@ -50,7 +50,8 @@ class RoomController extends GetxController {
 
   // add dispose to avoid memory leak
   @override
-  void onClose() {
-    super.onClose();
+  void dispose() {
+    listRoom();
+    super.dispose();
   }
 }
