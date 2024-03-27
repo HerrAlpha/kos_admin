@@ -7,6 +7,7 @@ import 'package:kos_admin/config/themes/colours.dart';
 import 'package:kos_admin/moduls/features/logout/controllers/logout_controller.dart';
 import 'package:kos_admin/moduls/features/occupy/views/ui/occupy_view.dart';
 import 'package:kos_admin/moduls/features/room/views/ui/room_view.dart';
+import 'package:kos_admin/moduls/features/subscription/views/subscription_view.dart';
 
 class MainHome extends StatelessWidget {
   MainHome({super.key});
@@ -36,7 +37,7 @@ class MainHome extends StatelessWidget {
     List<Widget> pages = [
       RoomView(),
       OccupyView(),
-      const Text('Subscription'),
+      SubscriptionView(),
       Container(
         padding: const EdgeInsets.all(10.0),
         width: double.infinity,

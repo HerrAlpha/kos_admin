@@ -38,4 +38,21 @@ class LocalDBServices {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove('access_token');
   }
+
+  /// Save UUID
+  static Future<void> setUUID(String uuid) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('uuid', uuid);
+  }
+
+  /// Get UUID
+  static Future<String?> getUUID() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('uuid');
+  }
+
+  static Future<void> removeUUID() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('uuid');
+  }
 }

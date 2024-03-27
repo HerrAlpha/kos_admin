@@ -3,6 +3,7 @@ import 'package:kos_admin/config/routes/app_routes.dart';
 import 'package:kos_admin/moduls/features/login/views/ui/login_view.dart';
 import 'package:kos_admin/moduls/features/main/views/main_home.dart';
 import 'package:kos_admin/moduls/features/start_screen/views/ui/start_screen.dart';
+import 'package:kos_admin/moduls/features/subscription/views/subscription_detail_view.dart';
 
 class AppPages {
   AppPages._();
@@ -23,6 +24,8 @@ class AppPages {
           page: () => MainHome(),
           transition: Transition.fadeIn,
           transitionDuration: const Duration(seconds: 1)),
+      GetPage(
+          name: AppRoutes.subscription, page: () => SubscriptionDetailView())
     ];
   }
 }

@@ -15,4 +15,6 @@ class ApiConst {
   static const String occupyAcception = 'occupy/acception';
 
   //* Subscription
+  static const String listSubscription = 'subscription/list';
+  static const String subscriptionAcception = 'subscription/acception';
 }

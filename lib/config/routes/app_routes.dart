@@ -5,4 +5,5 @@ class AppRoutes {
   static const String startscreen = '/startscreen';
   static const String login = '/login';
   static const String main = '/main';
+  static const String subscription = '/subscription';
 }

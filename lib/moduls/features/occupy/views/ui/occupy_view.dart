@@ -24,7 +24,7 @@ class OccupyView extends StatelessWidget {
                 onPressed: () {
                   occupyController.onInit();
                 },
-                icon: Icon(Icons.refresh)),
+                icon: const Icon(Icons.refresh)),
             const SizedBox(height: 10.0),
             Expanded(
               child: Obx(
