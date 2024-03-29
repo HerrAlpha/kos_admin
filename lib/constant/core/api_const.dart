@@ -17,4 +17,8 @@ class ApiConst {
   //* Subscription
   static const String listSubscription = 'subscription/list';
   static const String subscriptionAcception = 'subscription/acception';
+  static const String invoiceImage = 'subscription/invoice-image';
+
+  //* Resident
+  static const String imageResident = 'image/resident';
 }

@@ -26,6 +26,10 @@ class LogoutController extends GetxController {
       }
     }).catchError((e) {
       Get.snackbar('Error', e.toString());
+
+      LocalDBServices.clearToken();
+      LocalDBServices.clearUser();
+      LocalDBServices.removeUUID();
     });
   }
 }

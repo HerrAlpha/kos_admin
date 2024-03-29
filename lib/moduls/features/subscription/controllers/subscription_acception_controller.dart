@@ -27,7 +27,6 @@ class SubscriptionAcceptionController extends GetxController {
     try {
       var value = await SubscriptionAcceptionRepository.sendSubscriptionStatus(
           subcriptionsAcceptionRequest.toJson());
-      print(value!.data);
       if (value!.statusCode == '201') {
         Get.snackbar('Success', 'Success');
         subscriptionController.onInit();

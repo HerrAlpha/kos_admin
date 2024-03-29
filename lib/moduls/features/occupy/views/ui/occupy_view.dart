@@ -6,6 +6,7 @@ import 'package:kos_admin/config/themes/app_theme.dart';
 import 'package:kos_admin/config/themes/colours.dart';
 import 'package:kos_admin/moduls/features/occupy/controllers/occupy_acception_controller.dart';
 import 'package:kos_admin/moduls/features/occupy/controllers/occupy_controller.dart';
+import 'package:kos_admin/moduls/features/resident_image/controllers/resident_image_controller.dart';
 import 'package:kos_admin/moduls/models/occupies/occupies_response.dart';
 
 class OccupyView extends StatelessWidget {
@@ -13,6 +14,8 @@ class OccupyView extends StatelessWidget {
   final OccupyController occupyController = Get.put(OccupyController());
   final OccupyAcceptionController occupyAcceptionController =
       Get.put(OccupyAcceptionController());
+  final ResidentImageController residentImageController =
+      Get.put(ResidentImageController());
 
   @override
   Widget build(BuildContext context) {
@@ -221,25 +224,85 @@ class OccupyView extends StatelessWidget {
                       style: AppTheme.mainTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 14.0),
                     ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Phone Number: ${resident.phoneNumber}',
-                          style: AppTheme.mainTheme.textTheme.bodyMedium!
-                              .copyWith(fontSize: 14.0),
+                    subtitle: Scrollbar(
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Phone Number: ${resident.phoneNumber}',
+                              style: AppTheme.mainTheme.textTheme.bodyMedium!
+                                  .copyWith(fontSize: 14.0),
+                            ),
+                            Text(
+                              'Address: ${resident.address}',
+                              style: AppTheme.mainTheme.textTheme.bodyMedium!
+                                  .copyWith(fontSize: 14.0),
+                            ),
+                            Text(
+                              'NIK: ${resident.nik}',
+                              style: AppTheme.mainTheme.textTheme.bodyMedium!
+                                  .copyWith(fontSize: 14.0),
+                            ),
+                            Row(children: [
+                              FutureBuilder<Widget>(
+                                future: residentImage(
+                                    resident.id, 'user'), // your Future<Widget>
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<Widget> snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return const CircularProgressIndicator(); // or some other widget while waiting
+                                  } else {
+                                    if (snapshot.hasError)
+                                      return Text('null');
+                                    else
+                                      return snapshot
+                                          .data!; // Widget of the completed Future
+                                  }
+                                },
+                              ),
+                              const SizedBox(width: 10),
+                              FutureBuilder<Widget>(
+                                future: residentImage(
+                                    resident.id, 'ktm'), // your Future<Widget>
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<Widget> snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return const CircularProgressIndicator(); // or some other widget while waiting
+                                  } else {
+                                    if (snapshot.hasError)
+                                      return Text('null');
+                                    else
+                                      return snapshot
+                                          .data!; // Widget of the completed Future
+                                  }
+                                },
+                              ),
+                              const SizedBox(width: 10),
+                              FutureBuilder<Widget>(
+                                future: residentImage(
+                                    resident.id, 'nik'), // your Future<Widget>
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<Widget> snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return const CircularProgressIndicator(); // or some other widget while waiting
+                                  } else {
+                                    if (snapshot.hasError)
+                                      return Text('null');
+                                    else
+                                      return snapshot
+                                          .data!; // Widget of the completed Future
+                                  }
+                                },
+                              )
+                            ])
+                          ],
                         ),
-                        Text(
-                          'Address: ${resident.address}',
-                          style: AppTheme.mainTheme.textTheme.bodyMedium!
-                              .copyWith(fontSize: 14.0),
-                        ),
-                        Text(
-                          'NIK: ${resident.nik}',
-                          style: AppTheme.mainTheme.textTheme.bodyMedium!
-                              .copyWith(fontSize: 14.0),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 )
@@ -255,6 +318,18 @@ class OccupyView extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+
+  Future<Widget> residentImage(String idResident, String typePhoto) async {
+    await residentImageController.getResidentImage(idResident, typePhoto);
+    return SizedBox(
+      height: 100,
+      width: 100,
+      child: Image.memory(
+        residentImageController.residentImage.value,
+        fit: BoxFit.cover,
+      ),
     );
   }
 }

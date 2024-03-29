@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:kos_admin/component/buttons.dart';
 import 'package:kos_admin/config/themes/app_theme.dart';
 import 'package:kos_admin/config/themes/colours.dart';
+import 'package:kos_admin/moduls/features/resident_image/controllers/resident_image_controller.dart';
 import 'package:kos_admin/moduls/features/room/controllers/room_controller.dart';
 import 'package:kos_admin/moduls/models/rooms/rooms_response.dart';
 
@@ -11,6 +12,8 @@ class RoomView extends StatelessWidget {
   RoomView({super.key});
 
   final RoomController roomController = Get.put(RoomController());
+  final ResidentImageController residentImageController =
+      Get.put(ResidentImageController());
   final List<String> floor = ['all', '1', '2', '3'];
 
   @override
@@ -189,25 +192,45 @@ class RoomView extends StatelessWidget {
                       style: AppTheme.mainTheme.textTheme.bodyMedium!
                           .copyWith(fontSize: 14.0),
                     ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Phone Number: ${resident.phoneNumber}',
-                          style: AppTheme.mainTheme.textTheme.bodyMedium!
-                              .copyWith(fontSize: 14.0),
-                        ),
-                        Text(
-                          'Address: ${resident.address}',
-                          style: AppTheme.mainTheme.textTheme.bodyMedium!
-                              .copyWith(fontSize: 14.0),
-                        ),
-                        Text(
-                          'NIK: ${resident.nik}',
-                          style: AppTheme.mainTheme.textTheme.bodyMedium!
-                              .copyWith(fontSize: 14.0),
-                        ),
-                      ],
+                    subtitle: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Phone Number: ${resident.phoneNumber}',
+                            style: AppTheme.mainTheme.textTheme.bodyMedium!
+                                .copyWith(fontSize: 14.0),
+                          ),
+                          Text(
+                            'Address: ${resident.address}',
+                            style: AppTheme.mainTheme.textTheme.bodyMedium!
+                                .copyWith(fontSize: 14.0),
+                          ),
+                          Text(
+                            'NIK: ${resident.nik}',
+                            style: AppTheme.mainTheme.textTheme.bodyMedium!
+                                .copyWith(fontSize: 14.0),
+                          ),
+                          FutureBuilder<Widget>(
+                            future: residentImage(
+                                resident.id, 'user'), // your Future<Widget>
+                            builder: (BuildContext context,
+                                AsyncSnapshot<Widget> snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator(); // or some other widget while waiting
+                              } else {
+                                if (snapshot.hasError)
+                                  return Text('null');
+                                else
+                                  return snapshot
+                                      .data!; // Widget of the completed Future
+                              }
+                            },
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 )
@@ -223,6 +246,18 @@ class RoomView extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+
+  Future<Widget> residentImage(String idResident, String typePhoto) async {
+    await residentImageController.getResidentImage(idResident, typePhoto);
+    return SizedBox(
+      height: 100,
+      width: 100,
+      child: Image.memory(
+        residentImageController.residentImage.value,
+        fit: BoxFit.cover,
+      ),
     );
   }
 }
